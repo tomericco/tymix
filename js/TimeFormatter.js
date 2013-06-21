@@ -1,4 +1,5 @@
 /*
+ * Formatting engine.
  * This namespace holds engine methods for formatting unix time into Timestamp object.
  */
 TimeFormatter = {
@@ -9,6 +10,18 @@ TimeFormatter = {
 	formatTimePassed: function formatTimePassed(unixTime) {
 		var currentTime = Math.floor(new Date().getTime() / 1000);
 		var secondsPassed = currentTime - unixTime;
+
+		if (secondsPassed < 1) {
+			return new Timestamp({
+				minutes: 0,
+				hours: 0,
+				days: 0,
+				weeks: 0,
+				months: 0,
+				years: 0
+			});
+		}
+
 		var formattedTime = {};
 
 		// Calculate years (year is 31536000 seconds)
@@ -54,11 +67,5 @@ TimeFormatter = {
 		}
 
 		return new Timestamp(formattedTime);
-	},
-	/*
-	 * Formats the given unix timestamp into a Timestamp object, and returns it.
-	 */
-	formatTime: function formatTime(unixTime) {
-
 	}
 };
