@@ -4,10 +4,20 @@
 	<script type="text/javascript" src="js/Describer.js"></script>
 	<script type="text/javascript" src="js/TimeFormatter.js"></script>
 	<script type="text/javascript" src="js/Timestamp.js"></script>
+	<script type="text/javascript" src="js/tymix.js"></script>
 </head>
-
+<title>Tymix examples</title>
 
 <body>
+
+<script type="text/javascript">
+
+	var tymix = new Tymix({
+		level: "low"
+	});
+	console.log(tymix.describe(new Date().getTime() / 1000 - 1242));
+
+</script>
 
 </body>
 </html>
