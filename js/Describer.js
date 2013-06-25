@@ -76,12 +76,12 @@ Describer.prototype.engine = {
 		return "Just now";
 	},
 	"medium": function mediumPercisionDescriber(timestamp) {
-		if (timestamp.getYears() >== 3) {
+		if (timestamp.getYears() >= 3) {
 			return "A few years ago";
 		}
 
 		if (timestamp.getYears() > 1 || 
-			(timestamp.getYears() === 1 && timestamp.getMonths() >== 6)) {
+			(timestamp.getYears() === 1 && timestamp.getMonths() >= 6)) {
 			return "Over a year ago";
 		}
 
@@ -94,7 +94,7 @@ Describer.prototype.engine = {
 		}
 
 		// Assume less than year (year is 0)
-		if (timestamp.getMonths() >== 10) {
+		if (timestamp.getMonths() >= 10) {
 			return "Almost a year ago";
 		}
 
@@ -106,7 +106,7 @@ Describer.prototype.engine = {
 			return "Half a year ago";
 		}
 
-		if (timestamp.getMonths() >== 6) {
+		if (timestamp.getMonths() >= 1) {
 			return "A few months ago";
 		}
 
