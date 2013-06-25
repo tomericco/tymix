@@ -1,4 +1,8 @@
 function Timestamp(time) {
+	if (typeof time === 'undefined' || time === null) {
+		return null;
+	}
+
 	this.minutes = time.minutes;
 	this.hours = time.hours;
 	this.days = time.days;

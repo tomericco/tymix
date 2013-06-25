@@ -1,23 +1,135 @@
 <html>
 <head>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
 	<script type="text/javascript" src="js/Constants.js"></script>
 	<script type="text/javascript" src="js/Describer.js"></script>
 	<script type="text/javascript" src="js/TimeFormatter.js"></script>
 	<script type="text/javascript" src="js/Timestamp.js"></script>
 	<script type="text/javascript" src="js/tymix.js"></script>
+
+	<script type="text/javascript">
+
+	// Init a new tymix instance with the desired percision level
+	var tymix = new Tymix({
+		level: "medium"
+	});
+
+	/*
+	 * Generates the timestamp for capturing buttons.
+	 */
+	function calcTimeCapturing(el, timeDiff) {
+		var pastTime = Math.floor(new Date().getTime() / 1000 - timeDiff);
+		var pastDate =  new Date(pastTime * 1000);
+
+		var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+		var year = pastDate.getFullYear();
+		var month = months[pastDate.getMonth()];
+		var date = pastDate.getDate();
+		var hour = pastDate.getHours();
+		var min = pastDate.getMinutes();
+		var sec = pastDate.getSeconds();
+		var time = date+', '+month+' '+year+' '+hour+':'+min+':'+sec ;
+		
+		el.html('Capture ' + time);
+
+		el.click(function onCaptureClick(event) {
+			var button = jQuery(event.target);
+			var parent = button.parent();
+
+			// Use tymix to get the right time description
+			parent.find('.desc').html(tymix.describe(pastTime));
+		});
+	}
+
+	jQuery(window).load(function () {
+		calcTimeCapturing(jQuery('#capture1'), 94608000);
+		calcTimeCapturing(jQuery('#capture2'), 5184000);
+		calcTimeCapturing(jQuery('#capture3'), 604800);
+		calcTimeCapturing(jQuery('#capture4'), 86400);
+		calcTimeCapturing(jQuery('#capture5'), 7400);
+	});
+	
+</script>
 </head>
+
+<style type="text/css">
+	body {
+		background-color: #ECD353;
+	}
+
+	h2 {
+		font-family: Arial;
+		font-size: 35px;
+		color: #230B06;
+		text-align: center;
+		padding-top: 25px;
+		margin: 0px;
+	}
+
+	h4 {
+		font-weight: lighter;
+		font-family: Arial;
+		font-size: 16px;
+		color: #230B06;
+		text-align: center;
+		padding-top: 3px;
+		margin: 0px;
+	}
+
+	span {
+		font-family: Arial;
+		font-size: 18px;
+	}
+
+	.center {
+		background-color: #D66F2F;
+		box-shadow: 5px 5px 5px #666;
+		-moz-box-shadow: 5px 5px 5px #666;
+		-webkit-box-shadow: 10px 15px 40px #666;
+		border-radius: 15px;
+		margin-top: 50px;
+		margin-left: auto ;
+  		margin-right: auto ;
+		width: 650px;
+	}
+
+	.button {
+		padding: 5px;
+		margin-left: 5px;
+		border: 1px solid black;
+	}
+
+	.button:hover {
+		cursor: pointer;
+	}
+
+	.desc {
+		padding-left: 4em;
+	}
+
+	.icon {
+		width: 30px;
+		height: 30px;
+		margin-left: 15px;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAeCAYAAAGnACU3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAbVJREFUeNpiYECA/wxYwHtmNIGfcBkYAyCAsOrHkHVgwAHAKgECCBnNh5r1H8qejy6JTQNeX/xnIAYABBBeXUxYJEC0ALKi82gKzqNLoBu7H10Ag62Aw3EKDGiOQKbxA4AAIsnf6IAJi+L36OEA5b9HikgBdMcTG0//0QPhP47EhE2zA0wc5uwLQByPRSEjFjGQugPYUut5AgF4HluqxpXC/6OldhQAEECEouk/sdFENGDCks7+Y0mYsGjBGhYJUAUNWOQakAw4j80mATyuE8CVIBqI8FoDeoD9JzVTMBGI9PPUig4HSkowDKcSGzgMVIkOYhNAAgOeou0/DqzAQA0AEGCMVCoVSTKHmUh1CtCwacfhXVDaEATiF0D8AS0yfpDioAC0Ivo9tAQKgFoCwwFQcXS150kpuQLQsr0BiZWPAZqF5wkkTXgZ+x6PZcTmLgMk3+P0aT+e2pAcS9Fr0QZ8lUACNep2LBn4Pz5L/xMwUIFIdUSZSapPGajhU1LjlIHEOO2nRuploEbqxRYc58mwHD2fBlCjREpAaso5QPnYSqQASuNGARon+3FUP/uh8goMgxUAAJHKvMfjVlt0AAAAAElFTkSuQmCC);
+    	padding: 5px 0 5px 30px;
+	}
+</style>
 <title>Tymix examples</title>
 
 <body>
-
-<script type="text/javascript">
-
-	var tymix = new Tymix({
-		level: "low"
-	});
-	console.log(tymix.describe(new Date().getTime() / 1000 - 1242));
-
-</script>
-
+<div class="center">
+	<h2>Examples for using tymix</h2>
+	<h4>(Click on the timestamp to get the time passed since then)</h4>
+	<br><br><br>
+	<div>
+		<div><span class="icon"></span><span id="capture1" class="button"></span><span class="desc"></span></div><br><br><br><br>
+		<div><span class="icon"></span><span id="capture2" class="button"></span><span class="desc"></span></div><br><br><br><br>
+		<div><span class="icon"></span><span id="capture3" class="button"></span><span class="desc"></span></div><br><br><br><br>
+		<div><span class="icon"></span><span id="capture4" class="button"></span><span class="desc"></span></div><br><br><br><br>
+		<div><span class="icon"></span><span id="capture5" class="button"></span><span class="desc"></span></div><br><br><br><br>
+	</div>
+</div>
 </body>
 </html>
