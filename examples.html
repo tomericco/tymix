@@ -26,10 +26,10 @@
 		var year = pastDate.getFullYear();
 		var month = months[pastDate.getMonth()];
 		var date = pastDate.getDate();
-		var hour = pastDate.getHours();
-		var min = pastDate.getMinutes();
-		var sec = pastDate.getSeconds();
-		var time = date+', '+month+' '+year+' '+hour+':'+min+':'+sec ;
+		var hour = pastDate.getHours() + '';
+		var min = pastDate.getMinutes() + '';
+		var sec = pastDate.getSeconds() + '';
+		var time = date+', '+month+' '+year+' '+ (hour.length === 1 ? '0'+ hour : hour) +':'+ (min.length === 1 ? '0'+ min : min) +':'+ (sec.length === 1 ? '0'+ sec : sec);
 		
 		el.html('Capture ' + time);
 
