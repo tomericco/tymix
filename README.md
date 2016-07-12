@@ -1,3 +1,8 @@
+##TL;DR  
+Use momentjs: http://momentjs.com/  
+
+
+
 tymix is all about describing a UNIX machine time, in human language words.
 tymix supports different levels of granularity, from vague and general to percise one (see examples below).
 
